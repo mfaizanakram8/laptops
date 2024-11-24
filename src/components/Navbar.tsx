@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import emailjs from '@emailjs/browser';
+import { FaWhatsapp } from 'react-icons/fa';
 
 emailjs.init("gipPkaR3oxwlkLC_6");
 
@@ -77,6 +78,13 @@ const Navbar = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const openWhatsApp = () => {
+    const phoneNumber = '923106800495'; // Updated with your number (added 92 for Pakistan's country code)
+    const message = 'Hello! I would like to know more about your products.';
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   // Animation variants
@@ -203,6 +211,22 @@ const Navbar = () => {
           </div>
         </nav>
       </header>
+
+      {/* WhatsApp Button */}
+      <motion.div 
+        className="fixed bottom-8 left-8 z-50"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <button
+          onClick={openWhatsApp}
+          className="bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all duration-300 flex items-center justify-center relative"
+          aria-label="Contact on WhatsApp"
+        >
+          <span className="absolute w-full h-full rounded-full animate-ping bg-green-400 opacity-75"></span>
+          <FaWhatsapp className="w-6 h-6 relative" />
+        </button>
+      </motion.div>
 
       {/* Floating Chat Icon with Pulse Effect */}
       <motion.div 
